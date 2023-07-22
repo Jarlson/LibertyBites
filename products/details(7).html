@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MENU</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css">
+                                 
+</head>
+<body>
+    
+    <div class="container">
+        <div class="navbar">
+         <div class="logo">
+            <a href="../index.html">
+                <img src="../images/ameri.png" width="150px">
+            </a>
+         </div>
+         <nav>
+            <ul>
+                <li><a href="../index.html" class="i">HOME</a></li>
+                <li><a href="../menu.html" class="i">MENU</a></li>
+                <li><a href="../account.html" class="i">ACCOUNT</a></li>
+                <li><a href="../about.html" class="i">ABOUT</a></li>
+        </ul>
+        </nav>
+            <a href="../cart.html">
+            <img src="../images/cart.png" width="30px" height="30px">
+            </a>
+        </div>     
+    </div>
+
+    
+    <!------- products details  -------->
+      <div class="small-container product">
+         <div class="row">
+             <div class="col-2">
+                <img src="../images/p7.jpg" width="75%">
+             </div>
+             <div class="col-2">
+                 <h1>CHEESE BURGER</h1>
+                 <h4>PHP 75.00</h4>
+                 <input type="number" value="1" id="quantityInput">
+                 <button class="btn" onclick="addToCart()">Add to cart</button>
+                 
+                 <h3>Product Details</h3>
+                 <br>
+                 <p>Enjoy the simplicity and deliciousness of our Regular Burger! Made with a perfectly cooked beef patty and classic toppings, this accessible delight is a go-to choice for a satisfying and straightforward burger experience.</p>
+             </div>
+        </div>
+    </div>
+        
+    <!------- featured products -------->   
+       <div class="small-container">
+        <div class="row row-2">
+            <h2>Other Menu items</h2>
+            <a href="../menu.html"><p class="try">view more</p></a>
+        </div>
+    </div>  
+        
+        
+        
+    <!------- featured products -------->
+    <div class="small-container">
+        
+        <div class="row">
+            <div class="col-4">
+                <a href="details(5).html">
+                <img src="../images/p5.jpg">
+                <h4>BURGER DELUXE</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>PHP 150.00</p>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="details(6).html">
+                <img src="../images/p6.jpg">
+                <h4>BACON BURGER</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half"></i>
+                </div>
+                <p>PHP 100.00</p>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="details(7).html">
+                <img src="../images/p7.jpg">
+                <h4>CHEESE BURGER</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half"></i>
+                </div>
+                <p>PHP 75.00</p>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="details(8).html">
+                <img src="../images/p8.jpg">
+                <h4>REGULAR BURGER</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>PHP 65.00</p>
+                </a>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    
+    <!------ brands ------>
+ 
+    
+    <!------ footer ------>
+    
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our APP</h3>
+                    <p>Download App for Android and Ios Mobile.</p>
+                </div>
+                <div class="footer-col-2">
+                    <img src="../images/ameri.png">
+                    <p>Our mission is to make the delicious diversity and culinary richness of American foods accessible to all, while promoting sustainability and mindful consumption for a truly enjoyable dining experience.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>LINKS</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Posts</li>
+                        <li>Return Policies</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+      // Function to add item to cart
+      function addToCart() {
+        const productName = document.querySelector(".col-2 h1").innerText;
+        const productPrice = parseFloat(document.querySelector(".col-2 h4").innerText.split(" ")[1]);
+        const quantity = parseInt(document.querySelector(".col-2 input").value);
+        const productImage = document.querySelector(".col-2 img").src;
+
+        const cartItem = { name: productName, price: productPrice, quantity: quantity, image: productImage };
+
+        // Check if cartItems already exist in LocalStorage
+        const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        existingCartItems.push(cartItem);
+
+        localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
+
+        alert("Item added to cart!");
+      }
+    </script>
+    
+</body>
+</html>

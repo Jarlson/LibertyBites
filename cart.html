@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIBERTY BITES | Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css">
+                                 
+</head>
+<body>
+    
+    <div class="container">
+        <div class="navbar">
+         <div class="logo">
+             <a href="index.html">
+            <img src="images/ameri.png" width="150px">
+             </a>
+         </div>
+         <nav>
+            <ul>
+               <li><a href="index.html" class="i">HOME</a></li>
+                <li><a href="menu.html" class="i">MENU</a></li>
+                <li><a href="account.html" class="i">ACCOUNT</a></li>
+                <li><a href="about.html" class="i">ABOUT</a></li>
+        </ul>
+        </nav>
+            <img src="images/cart.png" width="30px" height="30px">
+        </div>     
+    </div>
+
+ <!------ cart items ------>
+ <div class="small-container cart">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+
+            <!-- Dynamically generated cart items will be added here -->
+            <tbody id="cart-items">
+
+            </tbody>
+            
+        </table>
+
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>Php 0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>Php 0.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>Php 0.00</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+<div class="checkout-container">
+    <button id="checkout-btn" onclick="checkout()">Checkout</button>
+</div>  
+    
+    
+    <!------ brands ------>
+  
+    
+    <!------ footer ------>
+    
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our APP</h3>
+                    <p>Download App for Android and Ios Mobile.</p>
+                </div>
+                <div class="footer-col-2">
+                    <p>Our mission is to make the delicious diversity and culinary richness of American foods accessible to all, while promoting sustainability and mindful consumption for a truly enjoyable dining experience.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>LINKS</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Posts</li>
+                        <li>Return Policies</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+ <script>
+        // Function to retrieve cart items from LocalStorage
+        function getCartItems() {
+            return JSON.parse(localStorage.getItem("cartItems")) || [];
+        }
+
+        // Function to display the cart items in the table
+        function displayCartItems() {
+            const cartItems = getCartItems();
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = "";
+
+            let totalPrice = 0;
+
+            cartItems.forEach((item) => {
+                const subtotal = item.price * item.quantity;
+                totalPrice += subtotal;
+
+                const cartRow = document.createElement("tr");
+                cartRow.innerHTML = `
+                    <td>
+                        <div class="cart-info">
+                            <img src="${item.image}">
+                            <div>
+                                <p>${item.name}</p>
+                                <small>Price: Php ${item.price}</small>
+                                <br>
+                                <a href="#" onclick="removeCartItem('${item.name}')">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="number" value="${item.quantity}" onchange="updateSubtotal(this, ${item.price})"></td>
+                    <td>Php ${subtotal.toFixed(2)}</td>
+                `;
+
+                cartItemsContainer.appendChild(cartRow);
+            });
+
+            // Update the total price
+            updateTotalPrice(totalPrice);
+        }
+
+        // Function to update the subtotal when the quantity is changed
+        function updateSubtotal(input, price) {
+            const quantity = parseInt(input.value);
+            const subtotal = price * quantity;
+            const cartRow = input.parentNode.parentNode;
+            cartRow.querySelector("td:last-child").textContent = `Php ${subtotal.toFixed(2)}`;
+
+            const cartItems = getCartItems();
+            const productName = cartRow.querySelector("p").textContent;
+            const item = cartItems.find((item) => item.name === productName);
+            if (item) {
+                item.quantity = quantity;
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                updateTotalPrice(cartItems.reduce((total, item) => total + item.price * item.quantity, 0));
+            }
+        }
+
+        // Function to remove a cart item
+        function removeCartItem(productName) {
+            const cartItems = getCartItems();
+            const updatedCartItems = cartItems.filter((item) => item.name !== productName);
+            localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+            displayCartItems();
+        }
+
+        // Function to update the total price in the cart
+        function updateTotalPrice(totalPrice) {
+            const tax = 0.12 * totalPrice;
+            const total = totalPrice + tax;
+
+            const totalTable = document.querySelector(".total-price table");
+            totalTable.innerHTML = `
+                <tr>
+                    <td>Subtotal</td>
+                    <td>Php ${totalPrice.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>Php ${tax.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>Php ${total.toFixed(2)}</td>
+                </tr>
+            `;
+        }
+
+        // Display the cart items when the page loads
+        document.addEventListener("DOMContentLoaded", () => {
+            displayCartItems();
+        });
+    </script>
+    
+    
+    
+    <script>
+    // Function to handle the checkout process
+    function checkout() {
+        // Assuming you have a function to clear the cart after successful checkout
+        clearCart();
+
+        // Show the success message
+        const checkoutButton = document.getElementById("checkout-btn");
+        checkoutButton.textContent = "Order Successful!";
+        checkoutButton.classList.add("success");
+
+        // Optionally, you can redirect to a "thank you" page or perform other actions after checkout
+        // You can use window.location.href to redirect, like this:
+        // window.location.href = "thank_you.html";
+    }
+
+    // Function to clear the cart after successful checkout
+    function clearCart() {
+        localStorage.removeItem("cartItems");
+        displayCartItems(); // This will update the cart display after clearing the items
+    }
+</script>   
+    
+    
+</body>
+</html>

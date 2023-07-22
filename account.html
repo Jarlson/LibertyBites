@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIBERTY BITES| Account</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,200;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css">
+                                 
+</head>
+<body>
+    <div class="header">
+    <div class="container">
+        <div class="navbar">
+         <div class="logo">
+            <a href="index.html">
+                  <img src="images/ameri.png" width="150px">
+              </a>
+         </div>
+         <nav>
+            <ul>
+                <li><a href="index.html" class="i">HOME</a></li>
+                <li><a href="menu.html" class="i">MENU</a></li>
+                <li><a href="account.html" class="i">ACCOUNT</a></li>
+                <li><a href="about.html" class="i">ABOUT</a></li>
+        </ul>
+        </nav>
+            <a href="cart.html">
+            <img src="images/cart.png" width="30px" height="30px"></a>
+        </div>     
+    </div>
+
+ <!------ account page ------>
+
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="images/act.png">
+            </div>
+            
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-btn">
+                        <span onclick="login()">LOGIN</span>
+                        <span onclick="signup()">SIGN UP</span>
+                        <hr id="indicator">
+                    </div>
+                    
+                    <form id="LoginForm">
+                        <input type="text" placeholder="Username">
+                        <input type="password" placeholder="Password">
+                        <button type="submit" class="btn">LOGIN</button>
+                    </form>
+                    
+                    <form id="SignForm">
+                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Full Name">
+                        <input type="email" placeholder="Email">
+                        <input type="text" placeholder="Address">
+                        <input type="password" placeholder="Password">
+                        <button type="submit" class="btn">REGISTER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    <!------ footer ------>
+    
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our APP</h3>
+                    <p>Download App for Android and Ios Mobile.</p>
+                </div>
+                <div class="footer-col-2">
+                    <p>Our mission is to make the delicious diversity and culinary richness of American foods accessible to all, while promoting sustainability and mindful consumption for a truly enjoyable dining experience.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>LINKS</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Posts</li>
+                        <li>Return Policies</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+<!------ toggle form------>
+    <script>
+    
+        var LoginForm = document.getElementById("LoginForm");
+        var SignForm = document.getElementById("SignForm");
+        var Indicator = document.getElementById("indicator");
+        
+            function signup(){
+                SignForm.style.transform = "translateX(0px)";
+                LoginForm.style.transform = "translateX(0px)";
+                indicator.style.transform = "translateX(100px)";
+            }
+            function login(){
+                SignForm.style.transform = "translateX(300px)";
+                LoginForm.style.transform = "translateX(300px)";
+                indicator.style.transform = "translateX(0px)";
+            }
+        
+    </script>
+
+    
+</body>
+</html>
